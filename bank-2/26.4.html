@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Inside</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header>
+        <h1 class="text-yellow-600 text-5xl text-center mt-6">Lets get some 
+        <span class="text-violet-600">Moooooney</span>!!!</h1>
+    </header>
+    <main>
+        <section class="mt-12">
+            <div class="grid grid-cols-3 gap-4 w-9/12 mx-auto">
+                <div class="bg-green-400 p-8 text-white rounded-xl">
+                    <h4 class="text-2xl">Deposit</h4>
+                    <h2 class="text-5xl">$<span id="deposit-total">00</span></h2>
+                </div>
+                <div class="bg-yellow-400 p-8 text-white rounded-xl">
+                    <h4 class="text-2xl">Withdraw</h4>
+                    <h2 class="text-5xl">$<span id="withdraw-total">00</span></h2>
+                </div>
+                <div class="bg-violet-400 p-8 text-white rounded-xl">
+                    <h4 class="text-2xl">Balance</h4>
+                    <h2 class="text-5xl">$<span id="balance-total">1240</span></h2>
+                </div>
+            </div>
+        </section>
+    <!-- Deposit and withdraw -->
+    <section class="mt-12">
+        <div class="grid grid-cols-2 gap-4 w-9/12 mx-auto">
+            <div class="bg-fuchsia-400 p-8 rounded-xl">
+                <h4 class="text-white text-2xl mb-4">Please Deposit</h4>
+                <input id="deposit-field" class="w-9/12 block mb-2 px-3" placeholder="$ Amount you want to deposit" type="text">
+                <button id="btn-deposit" class="bg-amber-600 hover:bg-sky-700 px-8 py-2 text-white font-mediam rounded-lg">Deposit</button>    
+            </div>
+            <div class="bg-sky-300 p-8 rounded-xl">
+                <h4 class="text-white text-2xl mb-4">Please Withdraw</h4>
+                <input id="withdraw-field"  class="w-9/12 block mb-2 px-3" placeholder="$ Amount you want to withdraw" type="text">
+                <button id="btn-withdraw" class="bg-amber-600 hover:bg-sky-700 px-8 py-2 text-white font-mediam rounded-lg">Withdraw</button>
+            </div>
+        </div>
+    </section>
+    </main>
+
+
+
+
+    <script>
+//step 1: add event listener to the deposit button 
+document.getElementById('btn-deposit').addEventListener('click', function(){
+//step 2: get the deposit amount from the deposit input field
+//for input field use .value to the value inside the input
+const depositField = document.getElementById('deposit-field');
+const newDepositAmountString = depositField.value
+//amra number a convert korlam ar nahoi jogpol tik moto asbena
+const newDepositAmount = parseFloat(newDepositAmountString)
+//step 3: get the current doposit total
+const depositTotalElement = document.getElementById('deposit-total')
+const previousDepositTotalString = depositTotalElement.innerText;
+//amra number a convert korlam ar nahoi jogpol tik moto asbena
+const previousDepositTotal = parseFloat(previousDepositTotalString)
+//step 4: add numbers to set the total deposit
+const currentDepostTotal =  newDepositAmount + previousDepositTotal;
+//set the deposit total
+depositTotalElement.innerText = currentDepostTotal;
+
+//step 5: get balance current total
+const balanceTotalElement = document.getElementById('balance-total');
+const previousBalanceTotalString = balanceTotalElement.innerText;
+const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+//steo 6: calculate current total balance
+const currentBalanceTotal = previousBalanceTotal + newDepositAmount;
+//set the balance total 
+balanceTotalElement.innerText = currentBalanceTotal;
+
+//step-7: clear the deposit field
+depositField.value ='';
+})
+
+    </script>
+
+
+<!-- withdraw part start here -->
+<script>
+    // step 1:
+    document.getElementById('btn-withdraw').addEventListener('click', function(){
+    // step 2: 
+    const withDrawField = document.getElementById('withdraw-field');
+    const newWithdrawAmaountString = withDrawField.value;
+    const newWithdrawAmaount = parseFloat(newWithdrawAmaountString);
+    //step 3
+    const WithdrawTotalElement = document.getElementById('withdraw-total');
+    const previousWithdrawTotalString = WithdrawTotalElement.innerText;
+    const previousWithdrawTotal = parseFloat(previousWithdrawTotalString);
+    //step 4
+    const currentWithdrawTotal = previousWithdrawTotal + newWithdrawAmaount;
+    WithdrawTotalElement.innerText = currentWithdrawTotal;
+
+    //step 5
+    const balanceTotalElement = document.getElementById('balance-total');
+    const previousBalanceTotalString = balanceTotalElement.innerText;
+    const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+    //step 6
+    const newBalanceTotal = previousBalanceTotal - newWithdrawAmaount;
+    balanceTotalElement.innerText = newBalanceTotal;
+    //step 7: clear the input Field
+    withDrawField.value = '';
+    })
+</script>
+</body>
+</html>
